@@ -1,12 +1,13 @@
 from cgi import parse_qs
 from template import html
+
 def application(environ, start_response):
     d = parse_qs(environ['QUERY_STRING'])
     first_num = d.get('first_num', [''])[0]
     second_num = d.get('second_num', [''])[0]
     sum = "수를 입력하시오"
     mul = "수를 입력하시오"
-    if '' not in [first_num, second_num]:
+    if first_num.isdigit() and second_num.isdigit():
         first_num, second_num = int(first_num), int(second_num)
         sum = first_num + second_num
         mul = first_num * second_num
